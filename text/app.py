@@ -5,9 +5,9 @@ import pytesseract
 
 pytesseract.pytesseract.tesseract_cmd = './Tesseract-OCR/tesseract.exe'
 
-app_ocr = Flask(__name__)
+app = Flask(__name__)
 
-@app_ocr.route('/api/perform_ocr/<language>', methods=['PUT'])
+@app.route('/api/perform_ocr/<language>', methods=['PUT'])
 def perform_ocr(language):
     try:
         # Get the image file from the request
@@ -38,8 +38,8 @@ def perform_ocr(language):
         return jsonify(text)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-@app_ocr.route('/')
+@app.route('/')
 def hello():
     return 'Hello, text'
 if __name__ == '__main__':
-    app_ocr.run(debug=True, port=4000)
+    app.run(debug=True, port=4000)
